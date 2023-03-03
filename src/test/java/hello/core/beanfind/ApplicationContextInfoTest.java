@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Map;
+
 public class ApplicationContextInfoTest {
 
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -35,4 +37,5 @@ public class ApplicationContextInfoTest {
             }
         }
     }
+
 }
