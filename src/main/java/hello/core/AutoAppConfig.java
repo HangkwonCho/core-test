@@ -16,10 +16,11 @@ import org.springframework.context.annotation.FilterType;
 public class AutoAppConfig {
 
     // 자동빈 * 수동빈 빈 이름이 중복될 경우 수동 빈이 우선권을 가지게 되어 Overriding 된다.
-    @Bean(name = "memoryMemberRepository")
-    MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
+    // 스프링인 자동으로 Overriding 한다. 스프링부트는 오류를 출력하여 properties 파일에 설정값을 변경하도록 메세지를 출력한다.
+//    @Bean(name = "memoryMemberRepository")
+//    MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 
         // @ComponentScan 으로 하는 방법
         // @Component 가 붙은 클래스를 스캔하여 bean 컨테이너에 등록
