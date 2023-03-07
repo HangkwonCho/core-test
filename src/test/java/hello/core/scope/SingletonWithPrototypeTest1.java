@@ -53,7 +53,6 @@ public class SingletonWithPrototypeTest1 {
         @Autowired
         //private ObjectFactory<PrototypeBean> prototypeBeanProvider;
         //private ObjectProvider<PrototypeBean> prototypeBeanProvider;
-
         /**
          * java provider
          1. get() 메서드 하나로 기능이 단순
