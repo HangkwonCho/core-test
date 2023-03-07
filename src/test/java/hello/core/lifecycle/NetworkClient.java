@@ -2,6 +2,12 @@ package hello.core.lifecycle;
 
 public class NetworkClient {
 
+    // 생성과 초기화는 분리하는게 좋다.
+    // 스프링은 크게 3가지 방법으로 빈 생명주기 콜백을 지원한다.
+    // 1. 인터페이스(InitializingBean, DisposableBean)
+    // 2. 설정 정보에 초기화 메서드, 종료 메서드 지정
+    // 3. @PostConstruct, @PreDestory 에노테이션 지원
+
     private String url;
 
     public NetworkClient() {
