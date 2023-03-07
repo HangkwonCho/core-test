@@ -1,15 +1,14 @@
 package hello.core.scope;
 
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -52,7 +51,16 @@ public class SingletonWithPrototypeTest1 {
 
         // Provider를 이용
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        //private ObjectFactory<PrototypeBean> prototypeBeanProvider;
+        //private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+
+        /**
+         * java provider
+         1. get() 메서드 하나로 기능이 단순
+         2. 별도의 라이브러리 필요
+         3. 자바 표준이므로 스프링이 아닌 다른 컨테이너에서도 사용 가능
+        */
+        private Provider<PrototypeBean> prototypeBeanProvider;
 
 //        @Autowired
 //        public ClientBean(PrototypeBean prototypeBean) {
@@ -61,7 +69,8 @@ public class SingletonWithPrototypeTest1 {
 
         public int logic() {
             //PrototypeBean prototypeBean = applicationContext.getBean(PrototypeBean.class);
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            //PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
