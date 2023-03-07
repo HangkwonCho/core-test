@@ -3,6 +3,9 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 // 방버 1
 // public class NetworkClient implements InitializingBean, DisposableBean {
 public class NetworkClient {
@@ -16,7 +19,11 @@ public class NetworkClient {
              내가 코드를 고칠 수 없는 외부 라이브러리에 적용할 수 없다.
     */
     // 2. 설정 정보에 초기화 메서드, 종료 메서드 지정
-    // 3. @PostConstruct, @PreDestory 에노테이션 지원
+    // 3. @PostConstruct, @PreDestory 에노테이션 지원 - 권장
+    /**
+     - 단점 : 외부 라이브러리에는 적용하지 못한다. 외부 라이브러리를 초기화,
+             종료 해야 하면 @Bean(initMethod, destroyMethod)의 기능을 사용 하자.
+    */
 
     private String url;
 
@@ -56,11 +63,23 @@ public class NetworkClient {
 //    }
 
     // 방법 2
+//    public void init() throws Exception {
+//        connect();
+//        call("초기화 연결 메세지");
+//    }
+//
+//    public void close() throws Exception {
+//        disConnect();
+//    }
+
+    // 방법 3
+    @PostConstruct
     public void init() throws Exception {
         connect();
         call("초기화 연결 메세지");
     }
 
+    @PreDestroy
     public void close() throws Exception {
         disConnect();
     }
